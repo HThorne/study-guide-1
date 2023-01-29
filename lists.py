@@ -284,16 +284,13 @@ def join_strings_with_comma(words):
         >>> join_strings_with_comma(["Pretzel"])
         'Pretzel'
     """
-    if len(words) == 1:
-        return words[0]
 
-    else:
-        string = words[0]
+    string = words[0]
 
-        for word in words[1:]:
-            string += ", " + word
+    for word in words[1:]:
+        string += ", " + word
         
-        return string
+    return string
 
 
 def reverse_list(items):
@@ -316,9 +313,8 @@ def reverse_list(items):
         >>> orig
         ['apple', 'berry', 'cherry']
     """
-    reversed_items = items[::-1]
+    return items[::-1]
 
-    return reversed_items
 
 
 def reverse_list_in_place(items):
@@ -340,7 +336,7 @@ def reverse_list_in_place(items):
     """
     list_length = len(items)
  
-    for index in range(int(list_length / 2)):
+    for index in range(list_length // 2):
         # stores front item as variable before replacing with its opposite
         # in terms of list lengeth, then replaces that opposite with the
         # stored variable
