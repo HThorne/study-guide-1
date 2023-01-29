@@ -94,9 +94,11 @@ def smallest_int(numbers):
         for num in numbers:
             if num < smallest_num:
                 smallest_num = num
-
-
-    return smallest_num
+        
+        return smallest_num
+    
+    else:
+        return None
 
 
 def largest_int(numbers):
@@ -121,10 +123,11 @@ def largest_int(numbers):
         for num in numbers:
             if num > largest_num:
                 largest_num = num
-
-
-    return largest_num
-
+        
+        return largest_num
+    
+    else:
+        return None
 
 def halvesies(numbers):
     """Return list of numbers from input list, each divided by two.
@@ -281,8 +284,16 @@ def join_strings_with_comma(words):
         >>> join_strings_with_comma(["Pretzel"])
         'Pretzel'
     """
+    if len(words) == 1:
+        return words[0]
 
-    return ""
+    else:
+        string = words[0]
+
+        for word in words[1:]:
+            string += ", " + word
+        
+        return string
 
 
 def reverse_list(items):
@@ -322,14 +333,20 @@ def reverse_list_in_place(items):
     
         >>> orig = [1, 2, 3]
         >>> reverse_list_in_place(orig)
-        >>> orig
         [3, 2, 1]
         >>> orig = ["cookies", "love", "I"]
         >>> reverse_list_in_place(orig)
-        >>> orig
         ['I', 'love', 'cookies']
     """
-    items = items[::-1]
+    list_length = len(items)
+ 
+    for index in range(int(list_length / 2)):
+        # stores front item as variable before replacing with its opposite
+        # in terms of list lengeth, then replaces that opposite with the
+        # stored variable
+        front = items[index]
+        items[index] = items[list_length-index-1]
+        items[list_length -index -1] = front
 
     return items
 
@@ -356,17 +373,14 @@ def duplicates(items):
         >>> orig
         ['apple', 'apple', 'berry']
     """
-    item_set = set(items)
-    duplicate_count = len(items) - len(item_set)
     duplicate_check = []
     duplicates = []
     
-    while len(duplicates) != duplicate_count:
-        for item in items:
-            if item not in duplicate_check:
-                duplicate_check.append(item)
-            else:
-                duplicates.append(item)
+    for item in items:
+        if item not in duplicate_check:
+            duplicate_check.append(item)
+        elif item not in duplicates:
+            duplicates.append(item)
         
  
     return sorted(duplicates) 
@@ -397,7 +411,17 @@ def find_letter_indices(words, letter):
     `None`.)
     """
 
-    return []
+    letter_indices = []
+
+    for word in words:
+        if letter in word:
+            for i, char in enumerate(word):
+                if letter == char and i not in letter_indices:
+                    letter_indices.append(i)
+        else:
+            letter_indices.append(None)
+        
+    return letter_indices
 
 
 #####################################################################
